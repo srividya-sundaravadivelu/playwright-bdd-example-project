@@ -9,7 +9,7 @@ When('User clicks on the Start Today button', async ({ homePage }) => {
 Then('User should be redirected to the login page', async ({ loginPage }) => {
   // Step: Then User should be redirected to the login page
   // From: features\homepage-navigation-components.feature:8:5
-  await loginPage.checkLoginPageVisible();
+  await loginPage.verifyLoginHeading();
 });
 
 When('User clicks on the Login link', async ({ homePage }) => {

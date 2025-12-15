@@ -2,7 +2,7 @@ import { expect } from '@playwright/test';
 export class HomePage {
     constructor(page) {
         this.page = page;
-        this.url = '/firstPage';
+        this.url = "/firstPage"
         this.logo = page.getByText('SweetBalance');
         this.termsText = page.getByText('Our Terms of Service and');
         this.headingSmartDiabetes = page.getByRole('heading', { name: 'Smart Diabetes Tracking' });
