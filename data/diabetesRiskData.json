@@ -1,0 +1,26 @@
+[
+  {
+    "Age": "25",
+    "Weight": "70",
+    "FamilyHistory": "Yes",
+    "Activity": "Active (Exercise 3+ times a week)",
+    "BP": "Normal",
+    "Diet": "Healthy"
+  },
+  {
+    "Age": "45",
+    "Weight": "90",
+    "FamilyHistory": "No",
+    "Activity": "Moderate (Exercise 1-2 times a week)",
+    "BP": "High",
+    "Diet": "Average"
+  },
+  {
+    "Age": "60",
+    "Weight": "110",
+    "FamilyHistory": "Yes",
+    "Activity": "Sedentary (Rarely exercise)",
+    "BP": "Elevated",
+    "Diet": "Poor"
+  }
+]
