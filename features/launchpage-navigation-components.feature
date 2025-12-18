@@ -1,5 +1,5 @@
-@homepageNavigation
-Feature: Verify Homepage navigation components
+@launchpageNavigation
+Feature: Verify LaunchPage navigation components
 
   Background:
     Given User is on the SweetBalance page

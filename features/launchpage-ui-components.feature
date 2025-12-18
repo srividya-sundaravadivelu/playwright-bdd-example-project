@@ -1,10 +1,10 @@
-@homepageUI
-Feature: Verify Homepage UI components
+@launchpageUI
+Feature: Verify LaunchPage UI components
 
   Background:
     Given User is on the SweetBalance page
 
-  Scenario: Validate the presence of App Name on the home page 
+  Scenario: Validate the presence of App Name on the launch page 
     Then User should see app name on the top left
 
   Scenario: Validate the presence of policy details

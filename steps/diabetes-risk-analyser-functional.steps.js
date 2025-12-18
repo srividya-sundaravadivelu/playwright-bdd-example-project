@@ -1,9 +1,9 @@
 import { Given, When, Then } from '../fixtures/fixtures';
-Given('User is in diabetes risk analyzer', async ({ homePage, diabetesRiskAnalyserDialogPage }) => {
+Given('User is in diabetes risk analyzer', async ({ launchPage, diabetesRiskAnalyserDialogPage }) => {
     // Step: Given User is in diabetes risk analyzer
     // From: features\diabetes-risk-analyser-functional.feature:5:5 
-    await homePage.goto();
-    await homePage.clickCheckYourRiskButton();
+    await launchPage.goto();
+    await launchPage.clickCheckYourRiskButton();
     await diabetesRiskAnalyserDialogPage.waitForLoaded();
 });
 
@@ -13,10 +13,10 @@ When('User clicks Cancel button', async ({ diabetesRiskAnalyserDialogPage }) => 
     await diabetesRiskAnalyserDialogPage.clickCancelButton();
 });
 
-Then('User should be on the home page', async ({ homePage }) => {
+Then('User should be on the home page', async ({ launchPage }) => {
     // Step: Then User should be on the home page
     // From: features\diabetes-risk-analyser-functional.feature:9:5
-    await homePage.verifyHeadingSmartDiabetes();
+    await launchPage.verifyHeadingSmartDiabetes();
 });
 
 When('User does not provide required inputs', async ({ diabetesRiskAnalyserDialogPage }) => {
