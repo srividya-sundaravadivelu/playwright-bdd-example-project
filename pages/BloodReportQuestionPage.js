@@ -4,9 +4,7 @@ export class BloodReportQuestionPage {
         this.page = page;
         this.url = '/blood-report-question';
         this.uploadBloodReportButton = this.page.getByRole('button', { name: 'Upload Blood Report' });
-        this.stepThroughOnboardingButton = this.page.getByRole('button', { name: 'Step Through Onboarding' });
-        this.uploadBox = this.page.locator('[data-testid="upload-box"]');
-        this.dragDropText = this.page.getByText('Drag & drop');
+        this.stepThroughOnboardingButton = this.page.getByRole('button', { name: 'Step Through Onboarding' });      
     }
 
     async clickUploadBloodReportButton() {
@@ -15,11 +13,7 @@ export class BloodReportQuestionPage {
 
     async clickStepThroughOnboardingButton() {
         await this.stepThroughOnboardingButton.click();
-    }
-
-    async hoverOverUploadBox() {
-        await this.uploadBox.hover();
-    }
+    }   
 
     async verifyCurrentPageIsBloodReportQuestion() {
         await expect(this.page).toHaveURL(this.url);
@@ -31,9 +25,5 @@ export class BloodReportQuestionPage {
 
     async verifyStepThroughOnboardingButton() {
         await expect(this.stepThroughOnboardingButton).toBeVisible();
-    }
-
-    async verifyDragDropInteraction() {
-        await expect(this.dragDropText).toBeVisible();
-    }
+    }    
 }
