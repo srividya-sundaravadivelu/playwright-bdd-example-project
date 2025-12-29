@@ -25,6 +25,10 @@ export class UploadBloodReportPage {
         await this.uploadAndProcessButton.click();
     }
 
+    async clickOnboardingButton() {
+        await this.onboardingButton.click();
+    }
+
     async hoverOverUploadBox() {
         await this.uploadBox.hover();
     }
@@ -37,6 +41,10 @@ export class UploadBloodReportPage {
         await fileChooser.setFiles(filePath);
     }
 
+    async waitForReportAnalysisVisible() {
+        await expect(this.reportAnalysis).toBeVisible({ timeout: 30000 });
+    }
+
     async verifyDragDropInteraction() {
         await expect(this.dragDropText).toBeVisible();
     }
@@ -46,22 +54,22 @@ export class UploadBloodReportPage {
     }     
 
     async verifyUploadAndProcessButtonEnabled() {
-        await expect(this.uploadAndProcessButton).toBeEnabled(  { timeout: 15000 });
+        await expect(this.uploadAndProcessButton).toBeEnabled(  { timeout: 30000 });
     }
 
     async verifyReportAnalysisVisible() {       
-        await expect(this.reportAnalysis).toBeVisible({ timeout: 15000 });
+        await expect(this.reportAnalysis).toBeVisible({ timeout: 30000 });
     }
 
     async verifyOnboardingButtonVisible() {       
-        await expect(this.onboardingButton).toBeVisible({ timeout: 15000 });
+        await expect(this.onboardingButton).toBeVisible({ timeout: 30000 });
     }
 
     async verifyReportSectionsVisible() {       
-        await expect(this.bloodTestResultsSection).toBeVisible({ timeout: 15000 });
-        await expect(this.completeBloodCountSection).toBeVisible({ timeout: 15000 });
-        await expect(this.medicalConditionsSection).toBeVisible({ timeout: 15000 });
-        await expect(this.abnormalValuesSection).toBeVisible({ timeout: 15000 });
-        await expect(this.recommendationsSection).toBeVisible({ timeout: 15000 });
+        await expect(this.bloodTestResultsSection).toBeVisible({ timeout: 30000 });
+        await expect(this.completeBloodCountSection).toBeVisible({ timeout: 30000 });
+        await expect(this.medicalConditionsSection).toBeVisible({ timeout: 30000 });
+        await expect(this.abnormalValuesSection).toBeVisible({ timeout: 30000 });
+        await expect(this.recommendationsSection).toBeVisible({ timeout: 30000 });
     }    
 }

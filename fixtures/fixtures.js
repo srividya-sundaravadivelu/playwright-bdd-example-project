@@ -6,6 +6,7 @@ import { DiabetesRiskAnalyserDialogPage } from '../pages/DiabetesRiskAnalyserDia
 import { HomePage } from '../pages/HomePage';
 import { BloodReportQuestionPage } from '../pages/BloodReportQuestionPage';
 import { UploadBloodReportPage } from '../pages/UploadBloodReportPage';
+import { OnboardingUploadPage } from '../pages/OnboardingUploadPage';
 
 // Extend Playwright test with your custom fixtures (empty for now)
 export const test = base.extend({
@@ -27,6 +28,9 @@ export const test = base.extend({
   },
   uploadBloodReportPage: async ({ page }, use) => {
     await use(new UploadBloodReportPage(page));
+  },
+  onboardingUploadPage: async ({ page }, use) => {
+    await use(new OnboardingUploadPage(page));
   }
 });
 
