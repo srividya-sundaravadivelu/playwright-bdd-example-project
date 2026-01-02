@@ -10,6 +10,8 @@ export class OnboardingUploadPage {
         this.continueButton = this.page.getByRole('button', { name: 'Continue' });
         this.progressBar = this.page.locator('div').nth(4);
         // this.stepIndicators = this.page.locator('div').nth(5);
+        this.submitButton = this.page.getByRole('button', { name: 'Submit' });
+
     }
 
     async verifyAgeFieldVisible() {
@@ -89,5 +91,79 @@ export class OnboardingUploadPage {
         expect(validationMessage).toContain(expectedMessage);
     }
 
+    async fillStep1DataAndContinue(data) {
+        await this.verifyHeightFieldVisible();
+        await this.heightTextField.fill(data.step1.height);
+        await this.verifyWeightFieldVisible();
+        await this.weightTextField.fill(data.step1.weight);
+        await this.clickContinueButton();
+    }
+    async fillStep2Data(data) {
+        await this.selectOption(data.step2.intensity);
+    }
 
+    async fillStep3Data(data) {
+        await this.selectOption(data.step3.dietaryPreference);
+    }
+
+    async fillStep4Data(data) {
+        await this.selectOption(data.step4.cuisinePreference);
+    }
+    async selectOption(optionText) {
+        await this.page.locator('div.cursor-pointer').filter({ hasText: new RegExp(`^${optionText}\\b`) }).click();
+
+    }
+    async selectAllergy(allergy) {
+        // XPath: find span containing allergy text, then the sibling input checkbox
+        const checkbox = this.page.locator(
+            `xpath=//span[contains(text(), "${allergy}")]/following-sibling::input[@type="checkbox"]`
+        );
+
+        // Wait until the checkbox is visible and check it
+        await expect(checkbox).toBeVisible();
+        await checkbox.check();
+    }
+
+    async verifyPageTitle(expectedTitle) {
+        const titleLocator = this.page.getByRole('heading', { level: 2 });
+        await expect(titleLocator).toHaveText(expectedTitle);
+    }
+    async verifyPageSubText(expectedText) {
+        const subTextLocator = this.page.getByText(expectedText);
+        await expect(subTextLocator).toBeVisible();
+    }
+    async verifyBackButtonVisible() {
+        const backButton = this.page.getByRole('button', { name: 'Back' });
+        await expect(backButton).toBeVisible();
+    }
+    async verifyOptions(dataTable) {
+        const expectedOptions = dataTable.raw().flat();
+        for (const optionText of expectedOptions) {
+            const optionLocator = this.page.locator('div.cursor-pointer').filter({ hasText: new RegExp(`^${optionText}\\b`) });
+            await expect(optionLocator).toBeVisible();
+        }
+    }
+    async clickBackButton() {
+        const backButton = this.page.getByRole('button', { name: 'Back' });
+        await backButton.click();
+    }
+    async verifyAllergiesCheckboxes() {
+        const allergies = ['Peanuts', 'Shellfish', 'Dairy', 'Gluten', 'Soy', 'Eggs'];
+        for (const allergy of allergies) {
+            const checkbox = this.page.getByRole('checkbox', { name: allergy });
+            await expect(checkbox).toBeVisible();
+        }
+    }
+    async verifySubmitButtonVisible() {
+        const submitButton = this.page.getByRole('button', { name: 'Submit' });
+        await expect(submitButton).toBeVisible();
+    }
+    async verifyNavigationToPremiumPage(expectedTitle) {
+        const titleLocator = this.page.getByRole('heading', { level: 1 });
+        await expect(titleLocator).toHaveText(expectedTitle);
+    }
+    async clickSubmitButton() {
+        await this.submitButton.click();
+    }
 }
+

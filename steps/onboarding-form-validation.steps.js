@@ -1,22 +1,22 @@
 import { Given, When, Then } from '../fixtures/fixtures';
-Given('User is on onboarding form page', async ({ launchPage, loginPage, bloodReportQuestionPage, uploadBloodReportPage }) => {
-    // Step: Given User is on onboarding form page
-    // From: features\onboarding-form-validation.feature:5:5
-    await launchPage.goto();
-    await launchPage.clickLoginButton();
-    const timestamp = Date.now();
-    await loginPage.fillEmail('newuser' + timestamp + '@example.com');
-    await loginPage.clickContinueButton();
-    await loginPage.fillFullName("newuser");
-    await loginPage.fillUserName("newuser" + timestamp);
-    await loginPage.fillPassword(process.env.APP_PASSWORD);
-    await loginPage.checkAgreeTermsCheckbox();
-    await loginPage.clickCreateAccountButton();
-    await bloodReportQuestionPage.clickUploadBloodReportButton();
-    await uploadBloodReportPage.uploadFile("data/files/valid-blood-report.pdf");
-    await uploadBloodReportPage.clickUploadAndProcessButton();
-    await uploadBloodReportPage.waitForReportAnalysisVisible();
-    await uploadBloodReportPage.clickOnboardingButton();
+Given('User is on onboarding form page', async ({ onboardingUploadPage }) => {
+    // // Step: Given User is on onboarding form page
+    // // From: features\onboarding-form-validation.feature:5:5
+    // await launchPage.goto();
+    // await launchPage.clickLoginButton();
+    // const timestamp = Date.now();
+    // await loginPage.fillEmail('newuser' + timestamp + '@example.com');
+    // await loginPage.clickContinueButton();
+    // await loginPage.fillFullName("newuser");
+    // await loginPage.fillUserName("newuser" + timestamp);
+    // await loginPage.fillPassword(process.env.APP_PASSWORD);
+    // await loginPage.checkAgreeTermsCheckbox();
+    // await loginPage.clickCreateAccountButton();
+    // await bloodReportQuestionPage.clickUploadBloodReportButton();
+    // await uploadBloodReportPage.uploadFile("data/files/valid-blood-report.pdf");
+    // await uploadBloodReportPage.clickUploadAndProcessButton();
+    // await uploadBloodReportPage.waitForReportAnalysisVisible();
+    // await uploadBloodReportPage.clickOnboardingButton();
 });
 
 Then('User should see text field for Age, height , weight', async ({ onboardingUploadPage }) => {

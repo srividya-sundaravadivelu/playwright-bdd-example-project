@@ -7,6 +7,7 @@ import { HomePage } from '../pages/HomePage';
 import { BloodReportQuestionPage } from '../pages/BloodReportQuestionPage';
 import { UploadBloodReportPage } from '../pages/UploadBloodReportPage';
 import { OnboardingUploadPage } from '../pages/OnboardingUploadPage';
+import { UpgradePage } from '../pages/UpgradePage';
 
 // Extend Playwright test with your custom fixtures (empty for now)
 export const test = base.extend({
@@ -29,9 +30,30 @@ export const test = base.extend({
   uploadBloodReportPage: async ({ page }, use) => {
     await use(new UploadBloodReportPage(page));
   },
-  onboardingUploadPage: async ({ page }, use) => {
-    await use(new OnboardingUploadPage(page));
-  }
+  onboardingUploadPage: async ({ page, launchPage, loginPage, bloodReportQuestionPage, uploadBloodReportPage }, use) => {
+    // Go through step 1 once
+    await launchPage.goto();
+    await launchPage.clickLoginButton();
+    const timestamp = Date.now();
+    await loginPage.fillEmail('newuser' + timestamp + '@example.com');
+    await loginPage.clickContinueButton();
+    await loginPage.fillFullName("newuser");
+    await loginPage.fillUserName("newuser" + timestamp);
+    await loginPage.fillPassword(process.env.APP_PASSWORD);
+    await loginPage.checkAgreeTermsCheckbox();
+    await loginPage.clickCreateAccountButton();
+    await bloodReportQuestionPage.clickUploadBloodReportButton();
+    await uploadBloodReportPage.uploadFile("data/files/valid-blood-report.pdf");
+    await uploadBloodReportPage.clickUploadAndProcessButton();
+    await uploadBloodReportPage.waitForReportAnalysisVisible();
+    await uploadBloodReportPage.clickOnboardingButton();
+
+    const onboardingUploadPage = new OnboardingUploadPage(page);
+    await use(onboardingUploadPage);
+  },
+  upgradePage: async ({ page }, use) => {
+    await use(new UpgradePage(page));
+  },
 });
 
 // Create Given/When/Then using the extended test
