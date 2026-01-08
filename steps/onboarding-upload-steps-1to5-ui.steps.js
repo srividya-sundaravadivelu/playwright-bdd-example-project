@@ -1,6 +1,5 @@
 import { Given, When, Then } from '../fixtures/fixtures';
 import onboardingData from '../data/onboardingUploadData.json';
-import { on } from 'events';
 Given(
     'User is in step {int} for onboarding upload process',
     async ({ onboardingUploadPage }, stepNumber) => {
@@ -36,12 +35,6 @@ Then('User should dropdown option for Gender field', async ({ onboardingUploadPa
     await onboardingUploadPage.verifyGenderDropdownVisible();
 });
 
-// Then('User should see options in dropdown', async ({ onboardingUploadPage }, dataTable) => {
-//     // Step: Then User should see "Male , female, prefer not to say " options in dropdown
-//     // From: features\onboarding-form-validation.feature:14:5
-//     await onboardingUploadPage.verifyGenderDropdownOptions(dataTable);
-// });
-
 Then('User should see enabled {string} button', async ({ onboardingUploadPage }, arg) => {
     // Step: Then User should see enabled "Continue" button
     // From: features\onboarding-form-validation.feature:17:5
@@ -59,18 +52,6 @@ Then('Progress text should read Step {int} of {int}', async ({ onboardingUploadP
     // From: features\onboarding-form-validation.feature:23:5
     await onboardingUploadPage.verifyProgressText(arg, arg1);
 });
-
-// Then('Step {int} indicator should be highlighted', async ({ onboardingUploadPage }, arg) => {
-//     // Step: Then Step 1 indicator should be highlighted
-//     // From: features\onboarding-form-validation.feature:26:5
-//     await onboardingUploadPage.verifyStepIndicatorHighlighted(arg);
-// });
-
-// Then('Steps {int} to {int} should remain unhighlighted\\/inactive', async ({ onboardingUploadPage }, arg, arg1) => {
-//     // Step: Then Steps 2 to 5 should remain unhighlighted/inactive
-//     // From: features\onboarding-form-validation.feature:29:5
-//     await onboardingUploadPage.verifyStepsUnhighlighted(arg, arg1);
-// });
 
 When('User fills invalid values in any field and clicks continue button', async ({ onboardingUploadPage }, dataTable) => {
     // Step: When User fills invalid values in any field and clicks continue button
@@ -109,8 +90,6 @@ Then('User should move to step {int} of onboarding upload form', async ({ onboar
     // From: features\onboarding-form-validation.feature:37:5
     await onboardingUploadPage.verifyProgressText(arg, 5);
 });
-
-
 
 Then('Back button should be visible', async ({ onboardingUploadPage }) => {
     // Step: Then Back button should be visible

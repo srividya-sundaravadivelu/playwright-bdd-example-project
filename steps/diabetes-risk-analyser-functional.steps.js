@@ -1,4 +1,5 @@
 import { Given, When, Then } from '../fixtures/fixtures';
+import diabetesRiskData from '../data/diabetesRiskData.json';
 Given('User is in diabetes risk analyzer', async ({ launchPage, diabetesRiskAnalyserDialogPage }) => {
     // Step: Given User is in diabetes risk analyzer
     // From: features\diabetes-risk-analyser-functional.feature:5:5 
@@ -34,7 +35,7 @@ Then('User should see Calculate Risk button is  disabled', async ({ diabetesRisk
 When('User enters valid values in all fields and clicks Calculate Risk button', async ({ diabetesRiskAnalyserDialogPage }) => {
     // Step: When User clicks Calculate Risk button after entering valid values in all fields
     // From: features\diabetes-risk-analyser-functional.feature:16:5
-    await diabetesRiskAnalyserDialogPage.fillAllFields();
+    await diabetesRiskAnalyserDialogPage.fillAllFields(diabetesRiskData);
     await diabetesRiskAnalyserDialogPage.clickCalculateRiskButton();
 });
 

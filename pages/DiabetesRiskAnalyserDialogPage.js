@@ -96,20 +96,24 @@ export class DiabetesRiskAnalyserDialogPage {
         await this.dietQualityDropDown.selectOption({ index: 0 });
     }
 
-    async fillAllFields() {
-        await this.bloodPressureDropDown.selectOption('normal');
-        await this.physicalActivityLevelDropDown.selectOption('active');
-        await this.dietQualityDropDown.selectOption('excellent');
-        await this.ageField.fill('20');
-        await this.weightField.fill('60');
-        await this.familyHistoryCheckbox.check();
+    async fillAllFields(diabetesRiskData) {
+        await this.bloodPressureDropDown.selectOption(diabetesRiskData.BP);
+        await this.physicalActivityLevelDropDown.selectOption(diabetesRiskData.Activity);
+        await this.dietQualityDropDown.selectOption(diabetesRiskData.Diet);
+        await this.ageField.fill(diabetesRiskData.Age);
+        await this.weightField.fill(diabetesRiskData.Weight);
+        if (diabetesRiskData.FamilyHistory.toLowerCase() === 'yes') {
+            await this.familyHistoryCheckbox.check();
+        } else {
+            await this.familyHistoryCheckbox.uncheck();
+        }
     }
 
     async verifyDialogBox() {
         await expect(this.yourDiabetesRiskDialog).toBeVisible();
     }
 
-    async verifyCalculateRiskButtonDisabled(){
+    async verifyCalculateRiskButtonDisabled() {
         await expect(this.calculateRiskButton).toBeDisabled();
     }
 

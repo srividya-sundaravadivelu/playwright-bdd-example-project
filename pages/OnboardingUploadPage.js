@@ -9,10 +9,78 @@ export class OnboardingUploadPage {
         this.weightTextField = this.page.getByPlaceholder('Enter weight in kg (1-500)');
         this.continueButton = this.page.getByRole('button', { name: 'Continue' });
         this.progressBar = this.page.locator('div').nth(4);
-        // this.stepIndicators = this.page.locator('div').nth(5);
         this.submitButton = this.page.getByRole('button', { name: 'Submit' });
+    }        
 
+    async getProgressTextLocator(stepNumber) {
+        // return Locator directly
+        return this.page.getByText(`Step ${stepNumber} of 5`);
     }
+
+    // Action methods
+
+    async fillField(field, value) {
+        switch (field.toLowerCase()) {
+            case 'height':
+                await this.heightTextField.fill(value);
+                break;
+            case 'weight':
+                await this.weightTextField.fill(value);
+                break;
+            default:
+                throw new Error(`Unknown field: ${field}`);
+        }
+    }
+
+    async fillStep1DataAndContinue(data) {
+        await this.verifyHeightFieldVisible();
+        await this.heightTextField.fill(data.step1.height);
+        await this.verifyWeightFieldVisible();
+        await this.weightTextField.fill(data.step1.weight);
+        await this.clickContinueButton();
+    }
+
+    async fillStep2Data(data) {
+        await this.selectOption(data.step2.intensity);
+    }
+
+    async fillStep3Data(data) {
+        await this.selectOption(data.step3.dietaryPreference);
+    }
+
+    async fillStep4Data(data) {
+        await this.selectOption(data.step4.cuisinePreference);
+    }
+
+    async selectOption(optionText) {
+        await this.page.getByText(optionText, { exact: false }).click();
+    }
+
+    async selectCheckboxOption(optionText) {
+        const row = this.page
+            .locator('div')
+            .filter({ has: this.page.locator('span', { hasText: optionText }) });
+
+        const checkbox = row.locator('input[type="checkbox"]').first();
+
+        await expect(checkbox).toBeVisible();
+        await checkbox.check();
+    }
+
+    async clickContinueButton() {
+        await this.continueButton.click();
+    }
+
+    async clickBackButton() {
+        const backButton = this.page.getByRole('button', { name: 'Back' });
+        await backButton.click();
+    }
+
+    async clickSubmitButton() {
+        await this.submitButton.click();
+    }
+
+    // Verification methods
 
     async verifyAgeFieldVisible() {
         await expect(this.ageTextField).toBeVisible();
@@ -21,12 +89,15 @@ export class OnboardingUploadPage {
     async verifyGenderDropdownVisible() {
         await expect(this.genderDropdown).toBeVisible();
     }
+
     async verifyHeightFieldVisible() {
         await expect(this.heightTextField).toBeVisible();
     }
+
     async verifyWeightFieldVisible() {
         await expect(this.weightTextField).toBeVisible();
     }
+
     async verifyGenderDropdownOptions(dataTable) {
         const expectedOptions = dataTable.raw().flat();
 
@@ -43,44 +114,15 @@ export class OnboardingUploadPage {
     async verifyContinueButtonEnabled() {
         await expect(this.continueButton).toBeEnabled();
     }
+
     async verifyProgressBarVisible() {
         await expect(this.progressBar).toBeVisible();
-    }
-    async getProgressTextLocator(stepNumber) {
-        // return Locator directly
-        return this.page.getByText(`Step ${stepNumber} of 5`);
-    }
+    }    
 
     async verifyProgressText(currentStep, totalSteps) {
         const expectedText = `Step ${currentStep} of ${totalSteps}`;
         const locator = await this.getProgressTextLocator(currentStep);
         await expect(locator).toHaveText(expectedText);
-    }
-    // async verifyStepIndicatorHighlighted(stepNumber) {
-    //     const stepIndicator = this.stepIndicators.locator(`text=Step ${stepNumber}`);
-    //     await expect(stepIndicator).toHaveClass(/bg-purple-600/);
-    // }
-    // async verifyStepsUnhighlighted(startStep, endStep) {
-    //     for (let i = startStep; i <= endStep; i++) {
-    //         const stepIndicator = this.stepIndicators.locator(`text=Step ${i}`);
-    //         await expect(stepIndicator).not.toHaveClass(/bg-purple-600/);
-    //     }
-    // }
-    async fillField(field, value) {
-        switch (field.toLowerCase()) {
-            case 'height':
-                await this.heightTextField.fill(value);
-                break;
-            case 'weight':
-                await this.weightTextField.fill(value);
-                break;
-            default:
-                throw new Error(`Unknown field: ${field}`);
-        }
-    }
-
-    async clickContinueButton() {
-        await this.continueButton.click();
     }
 
     async verifyFieldErrorMessage(field, expectedMessage) {
@@ -90,38 +132,6 @@ export class OnboardingUploadPage {
 
         expect(validationMessage).toContain(expectedMessage);
     }
-
-    async fillStep1DataAndContinue(data) {
-        await this.verifyHeightFieldVisible();
-        await this.heightTextField.fill(data.step1.height);
-        await this.verifyWeightFieldVisible();
-        await this.weightTextField.fill(data.step1.weight);
-        await this.clickContinueButton();
-    }
-    async fillStep2Data(data) {
-        await this.selectOption(data.step2.intensity);
-    }
-
-    async fillStep3Data(data) {
-        await this.selectOption(data.step3.dietaryPreference);
-    }
-
-    async fillStep4Data(data) {
-        await this.selectOption(data.step4.cuisinePreference);
-    }
-    async selectOption(optionText) {
-        await this.page.getByText(optionText, { exact: false }).click();
-    }
-    // async selectAllergy(allergy) {
-    //     // XPath: find span containing allergy text, then the sibling input checkbox
-    //     const checkbox = this.page.locator(
-    //         `xpath=//span[contains(text(), "${allergy}")]/following-sibling::input[@type="checkbox"]`
-    //     );
-
-    //     // Wait until the checkbox is visible and check it
-    //     await expect(checkbox).toBeVisible();
-    //     await checkbox.check();
-    // }
 
     async verifyPageTitle(expectedTitle) {
         const titleLocator = this.page.getByRole('heading', { level: 2 });
@@ -135,15 +145,7 @@ export class OnboardingUploadPage {
         const backButton = this.page.getByRole('button', { name: 'Back' });
         await expect(backButton).toBeVisible();
     }
-    // async verifyOptions(dataTable) {
-    //     const expectedOptions = dataTable.raw().flat();
 
-    //     for (const optionText of expectedOptions) {
-    //         await expect(
-    //             this.page.getByRole('button', { name: new RegExp(`^${optionText}`) })
-    //         ).toBeVisible();
-    //     }
-    // }
     async verifyCheckboxOptions(dataTable) {
         const expectedOptions = dataTable.raw().flat();
 
@@ -157,31 +159,15 @@ export class OnboardingUploadPage {
             await expect(checkbox).toBeVisible();
         }
     }
-    async selectCheckboxOption(optionText) {
-        const row = this.page
-            .locator('div')
-            .filter({ has: this.page.locator('span', { hasText: optionText }) });
-
-        const checkbox = row.locator('input[type="checkbox"]').first();
-
-        await expect(checkbox).toBeVisible();
-        await checkbox.check();
-    }
-    async clickBackButton() {
-        const backButton = this.page.getByRole('button', { name: 'Back' });
-        await backButton.click();
-    }
 
     async verifySubmitButtonVisible() {
         const submitButton = this.page.getByRole('button', { name: 'Submit' });
         await expect(submitButton).toBeVisible();
     }
+
     async verifyNavigationToPremiumPage(expectedTitle) {
         const titleLocator = this.page.getByRole('heading', { level: 1 });
         await expect(titleLocator).toHaveText(expectedTitle);
-    }
-    async clickSubmitButton() {
-        await this.submitButton.click();
     }
 }
 

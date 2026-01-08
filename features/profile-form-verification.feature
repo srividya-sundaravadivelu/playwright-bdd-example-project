@@ -1,6 +1,5 @@
-@skip @profileFormVerification 
-# @skip - Skip this feature to avoid creating multiple accounts during test runs --
-
+# @skip - Skips the Scenario to avoid creating multiple accounts during test runs
+@profileFormVerification
 Feature: Profile Form Verification
 
   Background:
@@ -10,6 +9,7 @@ Feature: Profile Form Verification
     When User checks the Terms & conditions box
     Then Create Account button should be enabled
 
+  @skip
   Scenario: Verify Create account form  with valid data
     When User clicks create account button after filling valid data in all fields with
       | fullName | userName | password |
@@ -28,12 +28,14 @@ Feature: Profile Form Verification
       | userName | Username must be at least 3 characters                              |
       | password | Password must be at least 8 characters                              |
 
+  @skip
   Scenario: Verify presence of Upload Blood Report button
     When User clicks create account button after filling valid data in all fields with
       | fullName | userName | password |
       | John Doe | johndoe  | Test@123 |
     Then User should see Upload Blood Report button
 
+  @skip
   Scenario: Verify presence of Step Through Onboarding button
     When User clicks create account button after filling valid data in all fields with
       | fullName | userName | password |

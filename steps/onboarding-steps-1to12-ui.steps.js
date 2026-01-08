@@ -149,7 +149,7 @@ Then('user should see checkbox options in onboarding page', async ({ onboardingP
 Then('User should see input field for HbA1c number', async ({ onboardingPage }) => {
   // Step: Then User should see input field for HbA1c number
   // From: features\onboarding-step-12-ui.feature:21:5
-  await onboardingPage.verifyHbA1cInputField();
+  await onboardingPage.verifyInputField();
 });
 
 Then('User should see Continue button on onboarding page', async ({ onboardingPage }) => {
@@ -173,7 +173,7 @@ Then('Onboarding page should have description text {string}', async ({ onboardin
 When('User enters HbA1c value {string} in onboarding page and clicks continue', async ({ onboardingPage }, arg) => {
   // Step: When User enters HbA1c value "16.0" in onboarding page and clicks continue
   // From: features\onboarding-step-12-ui.feature:33:5
-  await onboardingPage.enterHbA1cValue(arg);
+  await onboardingPage.fillValue(arg);
   await onboardingPage.clickContinueButton();
 });
 
