@@ -1,0 +1,18 @@
+{
+  "step1": {
+    "height": "170",
+    "weight": "70"
+  },
+  "step2": {
+    "intensity": "Medium"
+  },
+  "step3": {
+    "dietaryPreference": "Vegetarian"
+  },
+  "step4": {
+    "cuisinePreference": "Indian"    
+  },
+  "step5": {
+    "allergies": ["Dairy", "Gluten"]
+  }
+}

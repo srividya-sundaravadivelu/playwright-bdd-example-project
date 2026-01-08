@@ -5,27 +5,24 @@ Feature: Onboarding Step 3 UI Verification
     Given User is in step 3 for onboarding process
 
   Scenario: Verify Step 3 heading is visible
-    Then Page should display title "Your taste buds—what team are they on?"
+    Then Onboarding page should display title "Age: own it, pick your number."
 
   Scenario: Verify step 3 sub text
-    Then Page should have sub text "Select your dietary preference"
+    Then Onboarding page should have sub text "Please select your age"
 
-  Scenario: Verify Progress bar reflects Step 3 of 5
-    Then Progress text should read Step 3 of 5
+  Scenario: Progress bar reflects Step 3 of 12
+    Then Onboarding page progress text should read Step 3 of 12
 
-  Scenario: Verify dietary options is displayed
-    Then User should see options
-      | All-inclusive diet |
-      | Vegetarian         |
-      | Vegan              |
-
-  Scenario: Verify Back button is visible
-    Then Back button should be visible
+  Scenario: Verify age group options
+    Then User should see age options from 18 years to 100 years in onboarding page
 
   Scenario: Verify option is selectable
-    When User selects option "Vegetarian"
-    Then User should move to step 4 of onboarding form 
+    When User selects option "18" in onboarding page
+    Then User should move to step 4 of onboarding form
+
+  Scenario: Verify Back button is visible
+    Then Back button should be visible on onboarding page
 
   Scenario: Verify back button function
-    When User clicks on Back button
+    When User clicks on Back button on onboarding page
     Then User should move to step 2 of onboarding form

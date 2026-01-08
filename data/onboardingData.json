@@ -1,18 +1,43 @@
 {
-  "step1": {
-    "height": "170",
-    "weight": "70"
-  },
-  "step2": {
-    "intensity": "Medium"
-  },
-  "step3": {
-    "dietaryPreference": "Vegetarian"
-  },
-  "step4": {
-    "cuisinePreference": "Indian"    
-  },
-  "step5": {
-    "allergies": ["Dairy", "Gluten"]
-  }
+    "step1": {
+        "disease": "Type 2"
+    },
+    "step2": {
+        "gender": "Female"
+    },
+    "step3": {
+        "age": "40"
+    },
+    "step4": {
+        "height": "170 cm"
+    },
+    "step5": {
+        "weight": "70 kg"
+    },
+    "step6": {
+        "dietaryPreference": "Vegetarian"
+    },
+    "step7": {
+        "cuisinePreference": "Indian"
+    },
+    "step8": {
+        "allergy": "Yes"
+    },
+    "step9": {
+        "allergies": [
+            "Dairy",
+            "Gluten"
+        ]
+    },
+    "step10": {
+        "medicalConditions": [
+            "High Blood Pressure"
+        ]
+    },
+    "step11": {
+        "intensity": "Medium"
+    },
+    "step12": {
+        "HbA1c": "7.5"
+    }
 }

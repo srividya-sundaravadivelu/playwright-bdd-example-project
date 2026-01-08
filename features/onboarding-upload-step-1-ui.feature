@@ -1,8 +1,8 @@
-@skip @onboardingFormValidation
-Feature: Onboarding Form Validation
+@skip @onboardingUploadStep1
+Feature: Onboarding Upload Step 1 Form Validation
 
   Background:
-    Given User is on onboarding form page
+    Given User is in step 1 for onboarding upload process
 
   Scenario: Verify presence of text field
     Then User should see text field for Age, height , weight
@@ -11,7 +11,7 @@ Feature: Onboarding Form Validation
     Then User should dropdown option for Gender field
 
   Scenario: Verify dropdown text for gender
-    Then User should see options in dropdown
+    Then User should see options
       | Male              |
       | Female            |
       | Prefer Not to Say |
@@ -42,4 +42,4 @@ Feature: Onboarding Form Validation
       | field  | value |
       | height |   170 |
       | weight |    65 |
-    Then User should move to step 2 of onboarding form
+    Then User should move to step 2 of onboarding upload form

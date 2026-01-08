@@ -5,31 +5,38 @@ Feature: Onboarding Step 4 UI Verification
     Given User is in step 4 for onboarding process
 
   Scenario: Verify Step 4 heading is visible
-    Then Page should display title "What's your go-to food passport?"
+    Then Onboarding page should display title "How close are you to the clouds?"
 
   Scenario: Verify step 4 sub text
-    Then Page should have sub text "To create a meal plan you'll enjoy, please select your preferred cuisines!"
+    Then Onboarding page should have sub text "Please enter your height"
 
-  Scenario: Verify Progress bar reflects Step 4 of 5
-    Then Progress text should read Step 4 of 5
+  Scenario: Progress bar reflects Step 4 of 12
+    Then Onboarding page progress text should read Step 4 of 12
 
   Scenario: Verify Back button is visible
-    Then Back button should be visible
-
-  Scenario: Verify cuisine options is displayed
-    Then User should see options
-      | Indian         |
-      | American       |
-      | Continental    |
-      | Mediterranean  |
-      | Asian          |
-      | Middle Eastern |
-      | Mexican        |
-
-  Scenario: Verify cuisine option is selectable
-    When User selects option "Indian"
-    Then User should move to step 5 of onboarding form
+    Then Back button should be visible on onboarding page
 
   Scenario: Verify back button function
-    When User clicks on Back button
+    When User clicks on Back button on onboarding page
     Then User should move to step 3 of onboarding form
+
+  Scenario: Verify step 4 has 2 tabs to select height
+    Then User should see tabs in onboarding page
+      | Centimeters |
+      | Inches      |
+
+  Scenario: Validate values for centimeters options
+    Then User should see centimeters options from 120 cm to 220 cm
+
+  Scenario: Validate values for inches options
+    When User selects "Inches" tab
+    Then User should see inches options from 4'5'' to 7'3'' inches
+
+  Scenario: Validate user able to select from option in centimeters
+    When User selects option "170 cm" in onboarding page
+    Then User should move to step 5 of onboarding form
+
+  Scenario: Validate user able to select from option in feet & inches
+    When User selects "Inches" tab
+    When User selects option "5' 7\"" in onboarding page
+    Then User should move to step 5 of onboarding form

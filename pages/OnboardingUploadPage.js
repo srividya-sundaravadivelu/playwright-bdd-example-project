@@ -110,19 +110,18 @@ export class OnboardingUploadPage {
         await this.selectOption(data.step4.cuisinePreference);
     }
     async selectOption(optionText) {
-        await this.page.locator('div.cursor-pointer').filter({ hasText: new RegExp(`^${optionText}\\b`) }).click();
-
+        await this.page.getByText(optionText, { exact: false }).click();
     }
-    async selectAllergy(allergy) {
-        // XPath: find span containing allergy text, then the sibling input checkbox
-        const checkbox = this.page.locator(
-            `xpath=//span[contains(text(), "${allergy}")]/following-sibling::input[@type="checkbox"]`
-        );
+    // async selectAllergy(allergy) {
+    //     // XPath: find span containing allergy text, then the sibling input checkbox
+    //     const checkbox = this.page.locator(
+    //         `xpath=//span[contains(text(), "${allergy}")]/following-sibling::input[@type="checkbox"]`
+    //     );
 
-        // Wait until the checkbox is visible and check it
-        await expect(checkbox).toBeVisible();
-        await checkbox.check();
-    }
+    //     // Wait until the checkbox is visible and check it
+    //     await expect(checkbox).toBeVisible();
+    //     await checkbox.check();
+    // }
 
     async verifyPageTitle(expectedTitle) {
         const titleLocator = this.page.getByRole('heading', { level: 2 });
@@ -136,24 +135,43 @@ export class OnboardingUploadPage {
         const backButton = this.page.getByRole('button', { name: 'Back' });
         await expect(backButton).toBeVisible();
     }
-    async verifyOptions(dataTable) {
+    // async verifyOptions(dataTable) {
+    //     const expectedOptions = dataTable.raw().flat();
+
+    //     for (const optionText of expectedOptions) {
+    //         await expect(
+    //             this.page.getByRole('button', { name: new RegExp(`^${optionText}`) })
+    //         ).toBeVisible();
+    //     }
+    // }
+    async verifyCheckboxOptions(dataTable) {
         const expectedOptions = dataTable.raw().flat();
+
         for (const optionText of expectedOptions) {
-            const optionLocator = this.page.locator('div.cursor-pointer').filter({ hasText: new RegExp(`^${optionText}\\b`) });
-            await expect(optionLocator).toBeVisible();
+            const row = this.page
+                .locator('div')
+                .filter({ has: this.page.locator('span', { hasText: optionText }) });
+
+            const checkbox = row.locator('input[type="checkbox"]').first();
+
+            await expect(checkbox).toBeVisible();
         }
+    }
+    async selectCheckboxOption(optionText) {
+        const row = this.page
+            .locator('div')
+            .filter({ has: this.page.locator('span', { hasText: optionText }) });
+
+        const checkbox = row.locator('input[type="checkbox"]').first();
+
+        await expect(checkbox).toBeVisible();
+        await checkbox.check();
     }
     async clickBackButton() {
         const backButton = this.page.getByRole('button', { name: 'Back' });
         await backButton.click();
     }
-    async verifyAllergiesCheckboxes() {
-        const allergies = ['Peanuts', 'Shellfish', 'Dairy', 'Gluten', 'Soy', 'Eggs'];
-        for (const allergy of allergies) {
-            const checkbox = this.page.getByRole('checkbox', { name: allergy });
-            await expect(checkbox).toBeVisible();
-        }
-    }
+
     async verifySubmitButtonVisible() {
         const submitButton = this.page.getByRole('button', { name: 'Submit' });
         await expect(submitButton).toBeVisible();
