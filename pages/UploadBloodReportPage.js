@@ -71,5 +71,12 @@ export class UploadBloodReportPage {
         await expect(this.medicalConditionsSection).toBeVisible({ timeout: 30000 });
         await expect(this.abnormalValuesSection).toBeVisible({ timeout: 30000 });
         await expect(this.recommendationsSection).toBeVisible({ timeout: 30000 });
-    }    
+    } 
+    
+    async uploadAndProceed(filePath) {
+        await this.uploadFile(filePath);
+        await this.clickUploadAndProcessButton();
+        await this.waitForReportAnalysisVisible();
+        await this.clickOnboardingButton();
+    }
 }

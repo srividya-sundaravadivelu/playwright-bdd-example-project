@@ -125,4 +125,14 @@ export class LoginPage {
 
         await expect(errorMap[field]).toHaveText(message);
     }
+
+    async createNewAccount(fullName, userName, userEmail, password) {
+        await this.fillEmail(userEmail);
+        await this.clickContinueButton();
+        await this.fillFullName(fullName);
+        await this.fillUserName(userName);
+        await this.fillPassword(password);
+        await this.checkAgreeTermsCheckbox();
+        await this.clickCreateAccountButton();
+    }
 }

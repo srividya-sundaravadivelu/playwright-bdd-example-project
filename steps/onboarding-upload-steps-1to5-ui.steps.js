@@ -2,7 +2,14 @@ import { Given, When, Then } from '../fixtures/fixtures';
 import onboardingData from '../data/onboardingUploadData.json';
 Given(
     'User is in step {int} for onboarding upload process',
-    async ({ onboardingUploadPage }, stepNumber) => {
+    async ({ launchPage, loginPage, bloodReportQuestionPage, uploadBloodReportPage, onboardingUploadPage }, stepNumber) => {
+        await launchPage.goto();
+        await launchPage.clickLoginButton();
+        const timestamp = Date.now();
+        const userEmail = `newuser${timestamp}@example.com`;
+        await loginPage.createNewAccount("newuser", `newuser${timestamp}`, userEmail, process.env.APP_PASSWORD);
+        await bloodReportQuestionPage.clickUploadBloodReportButton();
+        await uploadBloodReportPage.uploadAndProceed("data/files/valid-blood-report.pdf");
 
         if (stepNumber >= 2) {
             await onboardingUploadPage.fillStep1DataAndContinue(onboardingData);

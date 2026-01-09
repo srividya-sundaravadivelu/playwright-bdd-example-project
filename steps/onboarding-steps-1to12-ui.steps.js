@@ -1,9 +1,16 @@
 import { Given, When, Then } from '../fixtures/fixtures';
 import onboardingData from '../data/onboardingData.json';
 
-Given('User is in step {int} for onboarding process', async ({ onboardingPage }, stepNumber) => {
+Given('User is in step {int} for onboarding process', async ({ launchPage, loginPage, bloodReportQuestionPage, onboardingPage }, stepNumber) => {
   // Step: Given User is in step 1 for onboarding process
   // From: features\onboarding-step-1-ui.feature:5:5
+  await launchPage.goto();
+  await launchPage.clickLoginButton();
+  const timestamp = Date.now();
+  const userEmail = `newuser${timestamp}@example.com`;
+  await loginPage.createNewAccount("newuser", `newuser${timestamp}`, userEmail, process.env.APP_PASSWORD);
+  await bloodReportQuestionPage.clickStepThroughOnboardingButton();
+
   if (stepNumber >= 2) {
     await onboardingPage.fillStep1Data(onboardingData);
   }

@@ -31,46 +31,14 @@ export const test = base.extend({
   uploadBloodReportPage: async ({ page }, use) => {
     await use(new UploadBloodReportPage(page));
   },
-  onboardingUploadPage: async ({ page, launchPage, loginPage, bloodReportQuestionPage, uploadBloodReportPage }, use) => {
-    
-    await launchPage.goto();
-    await launchPage.clickLoginButton();
-    const timestamp = Date.now();
-    await loginPage.fillEmail('newuser' + timestamp + '@example.com');
-    await loginPage.clickContinueButton();
-    await loginPage.fillFullName("newuser");
-    await loginPage.fillUserName("newuser" + timestamp);
-    await loginPage.fillPassword(process.env.APP_PASSWORD);
-    await loginPage.checkAgreeTermsCheckbox();
-    await loginPage.clickCreateAccountButton();
-    await bloodReportQuestionPage.clickUploadBloodReportButton();
-    await uploadBloodReportPage.uploadFile("data/files/valid-blood-report.pdf");
-    await uploadBloodReportPage.clickUploadAndProcessButton();
-    await uploadBloodReportPage.waitForReportAnalysisVisible();
-    await uploadBloodReportPage.clickOnboardingButton();
-
-    const onboardingUploadPage = new OnboardingUploadPage(page);
-    await use(onboardingUploadPage);
+  onboardingUploadPage: async ({ page }, use) => {
+    await use(new OnboardingUploadPage(page));
   },
   upgradePage: async ({ page }, use) => {
     await use(new UpgradePage(page));
   },
-  onboardingPage: async ({ page, launchPage, loginPage, bloodReportQuestionPage }, use) => {
-    
-    await launchPage.goto();
-    await launchPage.clickLoginButton();
-    const timestamp = Date.now();
-    await loginPage.fillEmail('newuser' + timestamp + '@example.com');
-    await loginPage.clickContinueButton();
-    await loginPage.fillFullName("newuser");
-    await loginPage.fillUserName("newuser" + timestamp);
-    await loginPage.fillPassword(process.env.APP_PASSWORD);
-    await loginPage.checkAgreeTermsCheckbox();
-    await loginPage.clickCreateAccountButton();
-    await bloodReportQuestionPage.clickStepThroughOnboardingButton();
-
-    const onboardingPage = new OnboardingPage(page);
-    await use(onboardingPage);
+  onboardingPage: async ({ page }, use) => {
+    await use(new OnboardingPage(page));
   },
 });
 

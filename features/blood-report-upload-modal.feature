@@ -1,4 +1,4 @@
-@skip @bloodReportUploadModal
+@bloodReportUploadModal
 Feature: Blood Report Upload Modal Verification
 
   Background:

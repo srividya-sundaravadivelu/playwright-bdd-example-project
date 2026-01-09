@@ -5,13 +5,8 @@ Given('User is on blood report modal', async ({ launchPage, loginPage, bloodRepo
     await launchPage.goto();
     await launchPage.clickLoginButton();
     const timestamp = Date.now();
-    await loginPage.fillEmail('newuser' + timestamp + '@example.com');
-    await loginPage.clickContinueButton();
-    await loginPage.fillFullName("newuser");
-    await loginPage.fillUserName("newuser" + timestamp);
-    await loginPage.fillPassword(process.env.APP_PASSWORD);
-    await loginPage.checkAgreeTermsCheckbox();
-    await loginPage.clickCreateAccountButton();
+    const userEmail = `newuser${timestamp}@example.com`;
+    await loginPage.createNewAccount("newuser", `newuser${timestamp}`, userEmail, process.env.APP_PASSWORD);
     await bloodReportQuestionPage.clickUploadBloodReportButton();
 });
 
