@@ -1,11 +1,137 @@
-# Getting Started - Developing the project from scratch
+# Playwright BDD Example Project
+
+This repository is an example **Playwright + BDD (Behavior Driven Development)** automation framework that demonstrates how to write readable Gherkin feature files and execute them using Playwright.
+
+---
+
+## ✨ Key Highlights
+
+* Uses **Playwright** for fast and reliable browser automation
+* Uses **BDD (Gherkin)** syntax for readable test scenarios
+* Clear separation of:
+
+  * Feature files
+  * Step definitions
+  * Page Objects
+* Easy to extend and maintain
+* CI‑friendly structure
+
+---
+
+## 🧰 Tech Stack
+
+* **Node.js**
+* **Playwright**
+* **playwright-bdd**
+* **Gherkin (Given / When / Then)**
+* JavaScript 
+
+---
+
+## 📁 Project Structure
+
+```
+playwright-bdd-example-project/
+├── features/                 # Gherkin feature files
+│   └── onboarding/           # Feature files grouped by functionality
+├── steps/                    # Step definitions
+├── pages/                    # Page Object Model classes
+├── fixtures/                 # Shared fixtures & test context
+├── playwright.config.js      # Playwright configuration
+├── package.json              # Dependencies and scripts
+└── README.md                 # Project documentation
+```
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+Make sure you have the following installed:
+
+* **Node.js** (v16 or later)
+* **npm** (comes with Node.js)
+
+---
+
+### Installation
+
+Clone the repository and install dependencies:
+
+```bash
+git clone https://github.com/srividya-sundaravadivelu/playwright-bdd-example-project.git
+cd playwright-bdd-example-project
+npm install
+```
+
+Install Playwright browsers:
+
+```bash
+npx playwright install
+```
+
+---
+
+## ▶️ Running Tests
+
+### Run all BDD tests
+
+```bash
+npx playwright test
+```
+
+### Run tests using tags
+
+```bash
+npx playwright test --grep @loginPageUI
+```
+
+### Run a specific feature file
+
+```bash
+npx playwright test features/onboarding/step12.feature
+```
+
+---
+
+## 🧠 BDD Approach
+
+* **Feature files** describe application behavior in business‑readable language
+* **Step definitions** map Gherkin steps to Playwright actions
+* **Page Objects** handle UI interactions and keep steps clean
+
+
+## 🏗 Best Practices Followed
+
+* One **feature file per functionality or step**
+* Atomic and readable scenarios
+* Minimal logic inside step definitions
+* Reusable page methods
+* Tag‑based execution support
+
+---
+
+## 🔄 CI/CD Friendly
+
+This framework is suitable for:
+
+* GitHub Actions
+* Jenkins
+* Any CI pipeline that supports Node.js
+
+Headless execution and reporting are supported out of the box.
+
+-------------------------------------------------------------------------------------------------------------------------------
+
+# Steps to Develop the project from scratch
 ## Step 1. Create Project.
 
 Open Vs Code  Terminal
 
-mkdir manan-playwright-bdd-js
+mkdir example-playwright-bdd-js
 
-cd manan-playwright-bdd-js
+cd example-playwright-bdd-js
 
 npm init -y
 
@@ -117,18 +243,8 @@ To run in UI mode and see locators,
 
 npx playwright test –-ui
 
-## TODO : Add documentation for following:
 
-a note about .env
 
-npm install dotenv 
-Axe – accessibility testing
-npm i @axe-core/playwright --save-dev
-storage state
-ci/cd github actions
-parallel, retries
-data driven - json file examples and scenario outline
-strict mode violation error
 
 
 
